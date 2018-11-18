@@ -1,6 +1,11 @@
 version: "3"
 services:
-  echo:
-    build: .
+  master:
+    container_name: master
+    image: jenkins:latest
     ports:
-      - 9000:8080
+      - 8080:8080
+    volumes:
+      - ~/jenkins_home:/var/jenkins_home
+
+#e21a5cdf6c5e430c90989643d9bc446c
