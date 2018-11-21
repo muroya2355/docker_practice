@@ -1,0 +1,28 @@
+# データストアとなる MySQL の master/slave 構成の Service
+#
+# ・MySQL コンテナは DockerHub に登録されている
+#   mysql:5.7 のイメージをベースに作成する
+#
+# ・Master/Slave それぞれの役割を果たすことができる
+#   単一の Docker イメージを作成する
+#
+# ・環境変数 MYSQL_MASTER の値の有無によって、Master/Slave の挙動を制御する
+#
+# ・Slave を増やす場合は replicas のスケールアウトで対応する。
+#   その作業の際、Master/Slave のダウンタイムを許容する
+
+【mysqld】
+character-set-server=utf8mb4
+collation-server=utf8mb4_general_ci
+pid-file=/var/run/mysqld/mysqld.pid
+socket=/var/run/mysqld/mysqld.sock
+datadir=/var/lib
+#log-error=/var/log/mysqld/error.log
+#By default we only accept connections from localhost
+#bind-address=127.0.0.1
+#Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links=0
+relay-log=mysqld-relay-bin
+ralay-log-index=mysqld-relay-bin
+
+log-bin=/var/log/mysql/mysql-bin.log
